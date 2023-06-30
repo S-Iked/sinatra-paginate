@@ -40,7 +40,7 @@ module Sinatra
 
     def pagination_url *path
       params = path[-1].respond_to?(:to_hash) ? path.delete_at(-1).to_hash : {}
-      params = params.empty? ? '' : '?' + URI.escape(params.map{|*a| a.join('=')}.join('&')).to_s
+      params = params.empty? ? '' : '?' + URI.encode(params.map{|*a| a.join('=')}.join('&')).to_s
       ['/', path.compact.map(&:to_s)].flatten.join('/').gsub(%r{/+}, '/') + params
     end
 
